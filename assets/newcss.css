@@ -7,9 +7,9 @@
 
   /*======= Colors =======*/
   /* Change Favorite color */
-  --hue-color: 240;
+  --hue-color: 240; 
 
-  /*========= HSL Color mode =========*/
+  /* HSL color mode */
   --first-color: hsl(var(--hue-color), 69%, 61%);
   --first-color-second: hsl(var(--hue-color), 69%, 61%);
   --first-color-alt: hsl(var(--hue-color), 57%, 53%);
@@ -19,6 +19,7 @@
   --text-color-light: hsl(var(--hue-color), 8%, 65%);
   --input-color: hsl(var(--hue-color), 70%, 96%);
   --body-color: hsl(var(--hue-color), 60%, 99%);
+  --body-color-transparent: hsla(var(--hue-color), 60%, 99%, 0.3);
   --container-color: #fff;
   --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
   --scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
@@ -40,7 +41,7 @@
   --font-semi-bold: 600;
 
   /*============ Margin Bottom ===========*/
-  /* .25rem = 4px, .5rem=8px, .75rem = 12px*/
+    /* .25rem = 4px, .5rem=8px, .75rem = 12px*/
   --mb-0-25: 0.25rem;
   --mb-0-5: 0.5rem;
   --mb-0-75: 0.75rem;
@@ -70,19 +71,19 @@
 }
 /*================= Variables Dark Theme ===============*/
 body.dark-theme {
-  /*========= HSL Color mode =========*/
-
+  /* HSL color mode */
   --first-color-second: hsl(var(--hue-color), 30%, 8%);
   --title-color: hsl(var(--hue-color), 8%, 95%);
   --text-color: hsl(var(--hue-color), 8%, 75%);
   --input-color: hsl(var(--hue-color), 29%, 16%);
   --body-color: hsl(var(--hue-color), 28%, 12%);
+  --body-color-transparent: hsla(var(--hue-color), 28%, 12%, 0.3);
   --container-color: hsl(var(--hue-color), 29%, 16%);
   --scroll-bar-color: hsl(var(--hue-color), 12%, 48%);
   --scroll-thumb-color: hsl(var(--hue-color), 12%, 36%);
 }
 
-/*================= Button Dark/Light ===============*/
+/*========== Button Dark/Light ==========*/
 .nav__btns {
   display: flex;
   align-items: center;
@@ -167,7 +168,8 @@ img {
   bottom: 0;
   left: 0;
   z-index: var(--z-fixed);
-  background-color: var(--body-color);
+  background-color: var(--body-color-transparent);
+  /* backdrop-filter: blur(8px); */
 }
 
 .nav {
@@ -195,6 +197,15 @@ img {
   color: var(--first-color);
 }
 @media screen and (max-width: 767px) {
+  .skills__container {
+    grid-template-columns: 1fr; 
+    padding: 0 1rem;
+  }
+
+  .skills__content {
+    padding: 1.5rem; 
+  }
+  
   .nav__menu {
     position: fixed;
     bottom: -100%;
@@ -228,9 +239,9 @@ img {
 .nav__icon {
   font-size: 1.2rem;
 }
-.nav__icon {
+/* .nav__icon {
   font-size: 1.2rem;
-}
+} */
 .nav__close {
   position: absolute;
   right: 1.3rem;
@@ -247,6 +258,20 @@ img {
 /* Show Menu */
 .show-menu {
   bottom: 0;
+}
+
+.nav__lang {
+  margin-left: 1rem;
+}
+
+.nav__lang select {
+  font-size: var(--small-font-size);
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--first-color);
+  background-color: transparent;
+  color: var(--title-color);
+  cursor: pointer;
 }
 
 /* Active Link */
@@ -353,24 +378,28 @@ img {
 
 /*================== Buttons ===================*/
 .button {
-  display: inline-block;
-  background-color: var(--first-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--first-color); /* warna utama kamu */
   color: #fff;
-  padding: 1rem;
-  margin-bottom: 10px;
+  padding: 1rem 1.5rem;
+  border: none;
   border-radius: 0.5rem;
   font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 .button:hover {
-  background-color: var(--first-color-alt);
+  background-color: var(--first-color-alt); /* versi terang/gelap dari warna utama */
 }
 
 .button__icon {
   font-size: 1.25rem;
-  margin-left: 0.25rem;
-  transition: 0.3s;
+  margin-left: 0.5rem;
 }
+
 
 .button--white {
   background-color: #fff;
@@ -441,23 +470,62 @@ img {
   justify-content: center;
 }
 
-/*===================== SKILLS =========================*/
-
-:root {
-  --first-color: #007bff;
-  --first-color-lighter: #cce5ff;
-  --container-color: #ffffff;
-  --container-color-alt: #f3f3f3;
-  --mb-0-5: 0.5rem;
-  --mb-0-75: 0.75rem;
-  --mb-2-5: 2.5rem;
-  --h3-font-size: 1.25rem;
-  --normal-font-size: 1rem;
-  --font-medium: 500;
+/*==================== Waving hand  ====================*/
+.wave {
+  animation-name: wave-animation;
+  /* Refers to the name of your @keyframes element below */
+  animation-duration: 2.5s;
+  /* Change to speed up or slow down */
+  animation-iteration-count: infinite;
+  /* Never stop waving :) */
+  transform-origin: 70% 70%;
+  /* Pivot around the bottom-left palm */
+  display: inline-block;
 }
 
+@keyframes wave-animation {
+  0% {
+    transform: rotate(0.0deg)
+  }
+
+  10% {
+    transform: rotate(14.0deg)
+  }
+
+  /* The following five values can be played with to make the waving more or less extreme */
+  20% {
+    transform: rotate(-8.0deg)
+  }
+
+  30% {
+    transform: rotate(14.0deg)
+  }
+
+  40% {
+    transform: rotate(-4.0deg)
+  }
+
+  50% {
+    transform: rotate(10.0deg)
+  }
+
+  60% {
+    transform: rotate(0.0deg)
+  }
+
+  /* Reset for the last half to pause */
+  100% {
+    transform: rotate(0.0deg)
+  }
+}
+
+/*===================== SKILLS =========================*/
+
 .skills__container {
-  row-gap: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  column-gap: 2rem;
+  row-gap: 2rem;
 }
 
 .skills__header {
@@ -493,12 +561,15 @@ img {
 
 .skills__arrow {
   margin-left: auto;
-  transition: 0.4s;
+  transition: transform 0.4s ease;
 }
 
 .skills__list {
-  row-gap: 1.5rem;
+  overflow: hidden;
+  opacity: 0;
+  max-height: 0;
   padding-left: 2.7rem;
+  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
 }
 
 .skills__titles {
@@ -576,17 +647,22 @@ img {
   width: 60%;
 }
 
-.skills__close .skills__list {
-  height: 0;
-  overflow: hidden;
+.skills_open .skills__list {
+  max-height: 500px;
+  opacity: 1;
+  padding-left: 2.7rem;
+  margin-bottom: 2rem;
 }
 
-.skills__open .skills__list {
-  height: max-content;
-  margin-bottom: var(--mb-2-5);
+
+.skills_open .skills__list {
+  max-height: 500px;
+  opacity: 1;
+  padding-left: 2.7rem;
+  margin-bottom: 2rem;
 }
 
-.skills__open .skills__arrow {
+.skills_open .skills__arrow {
   transform: rotate(-180deg);
 }
 
@@ -887,7 +963,6 @@ img {
   color: var(--text-color-light);
   margin-top: 0.25rem;
 }
-
 
 /*================ Contact Me ===============*/
 
